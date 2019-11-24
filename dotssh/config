@@ -1,7 +1,3 @@
-HOST gitlab gitlab.cse.unsw.edu.au gitlab.cse.unsw.EDU.AU
-ProxyCommand ssh z5164500@weill.cse.unsw.edu.au -W %h:%p
-
-# unsw
 Host cse
    Hostname wagner.cse.unsw.edu.au
    User z5164500
@@ -9,8 +5,3 @@ Host cse
 Host plshaq
    Hostname whereisrichard.com
    User adam
-
-Host 6447
-   Hostname ec2-3-104-247-217.ap-southeast-2.compute.amazonaws.com
-   User ubuntu
-   IdentityFile ~/.ssh/adamtanana.pem
