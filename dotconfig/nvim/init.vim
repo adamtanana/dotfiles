@@ -91,5 +91,7 @@ if has("autocmd")
     augroup END
 
     autocmd BufNewFile,BufRead *.go setlocal noexpandtab
+    au BufNewFile,BufRead *.ts setlocal filetype=typescript
+    au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 endif
-
+:nnoremap <space> i<space><esc>
