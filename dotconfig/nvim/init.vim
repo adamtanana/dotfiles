@@ -29,30 +29,28 @@ imap jj <Esc>
 
 noremap % v%
 
-let g:go_fmt_command = "goimports"
-
 :autocmd BufWritePost *.go GoImports
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
-Plug 'Valloric/YouCompleteMe'
 Plug 'vim-airline/vim-airline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'zchee/nvim-go', { 'do': 'make'}
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-sleuth'
+Plug 'google/vim-maktaba'
+Plug 'bazelbuild/vim-bazel'
 Plug 'isruslan/vim-es6'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 call plug#end()
+
+call glaive#Install()
 
 let g:ale_completion_enabled = 1
 
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_echo_current_diagnostic = 0
-
-let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
 
 let g:strip_whitespace_on_save=1
@@ -61,6 +59,7 @@ let g:better_whitespace_ctermcolor=4
 
 let g:ale_linters = {
     \ 'c': ['cppcheck', 'flawfinder', 'uncrustify', 'clangd'],
+    \ 'cpp': ['cppcheck', 'flawfinder', 'uncrustify', 'clangd -std=c++17'],
     \ 'python': [],
     \ 'go': ['golint', 'gofmt', 'gobuild']}
 
@@ -95,3 +94,18 @@ if has("autocmd")
     au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 endif
 :nnoremap <space> i<space><esc>
+
+Glaive codefmt plugin[mappings]
+
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  autocmd FileType rust AutoFormatBuffer rustfmt
+  autocmd FileType vue AutoFormatBuffer prettier
+augroup END

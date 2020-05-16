@@ -178,7 +178,7 @@ bar {
 }
 
 # Set scrolling natural
-exec xinput set-prop 12 293 1
+exec xinput set-prop 13 311 1
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -191,7 +191,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 
 # gaps
 # disable tittlebar
-for_window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 3
 #smart_gaps on
 gaps inner 8
 smart_borders on

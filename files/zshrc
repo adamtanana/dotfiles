@@ -125,8 +125,19 @@ pwndbg() {
   gdb -n -ex source\ /usr/share/pwndbg/gdbinit.py $@;
 }
 
-reset_wifi() {
-  connmanctl disable wifi && connmanctl enable wifi;
+ctf() {
+  docker run -d \
+	--rm \
+    -h $1 \
+	--name $1 \
+	-v $(pwd):/ctf/work \
+	-p 23946:23946 \
+	--cap-add=SYS_PTRACE \
+	skysider/pwndocker;
+}
+
+c() {
+  docker exec -it $1 /bin/bash
 }
 
 export CSCOPE_EDITOR=nvim
@@ -139,3 +150,6 @@ if [ -f '/home/adamt/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/
 
 alias vimdiff='nvim -d'
 export SUDO_EDITOR=nvim
+
+
+export CXXFLAGS="$CXXFLAGS -std=c++17"
